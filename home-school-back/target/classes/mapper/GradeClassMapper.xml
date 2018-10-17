@@ -14,7 +14,6 @@
         <result property="sex" column="sex"/>
         <result property="birthday" column="birthday"/>
         <result property="admin" column="admin"/>
-        <result property="teaching" column="teaching"/>
     </resultMap>
 
     <resultMap id="gradeClassResult" type="com.java.pupil.entities.GradeClass">
@@ -32,5 +31,9 @@
         t_grade.grade_id,t_student.id ,t_student.`name` as stuname,t_course.`name` as coursename,t_grade.grade
         from t_grade,t_course,t_student
         where t_grade.s_no=t_student.id and t_grade.c_no=t_course.id and term=#{term}
+    </select>
+    <select id="findAllClassByTeacher" parameterType="String" resultMap="gradeClassResult">
+        select *
+        from t_class t1,t_teacher t2 WHERE t1.teacher=t2.id and t2.id=#{t_id}
     </select>
 </mapper>

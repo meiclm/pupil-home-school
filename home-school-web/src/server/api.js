@@ -24,10 +24,10 @@ const Api={
 
   // 找到该老师
   'findTeacher':(t_id) => `${root}/teacher?id=${t_id}`,
-  //查找该老师教的所有的班级
+  /*查找该老师教的所有的班级*/
   'findAllClass':(t_id) =>`${root}/teaching/class?t_id=${t_id}`,
-//  查该老师的全部的学生
-//   'findAllStudents':(t_id)=>`${root}/students`
+  /*查找该班级下的所有学生*/
+  'findThisClassStus':(c_id)=>`${root}/class/students?c_id=${c_id}`,
 // 修改个人信息
   'updateTeacher':(t_id,name,telephone,wechat,email)=>`${root}/teacher/update?t_id=${t_id}&name=${name}&telephone=${telephone}&wechat=${wechat}&email=${email}`,
   'getMessage':(t_id)=>`${root}/message?t_id=${t_id}`,

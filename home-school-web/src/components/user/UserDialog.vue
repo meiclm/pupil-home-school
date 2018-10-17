@@ -127,6 +127,7 @@
         },
         register() {
           let that = this;
+          console.log("男或者女："+this.user_up.sex);
           if (that.user_up.username.empty || that.user_up.password.empty || that.user_up.phone.empty) {
             alert("每一项不能为空！");
           } else if (that.user_up.password.length < 6 || that.user_up.password.length > 12) {
@@ -135,6 +136,7 @@
             alert("电话号码不正确！");
           } else {
             //注册
+            console.log("注册");
             Axios.post(Api.userSignUp(that.user_up.username, that.user_up.password, that.user_up.phone),
               {
                 headers: {

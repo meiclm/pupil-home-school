@@ -3,6 +3,7 @@ package com.java.pupil.entities;
 public class Student {
     private String id;//学号
     private String name;//姓名
+    private String sex;
     private String birthday;//邮箱
     private String address;//家庭住址
     private String phone;
@@ -47,4 +48,11 @@ public class Student {
         this.phone = phone;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 }

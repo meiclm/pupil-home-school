@@ -44,6 +44,6 @@
     </select>
     <insert id="addMessage" parameterType="com.java.pupil.entities.Message">
         INSERT into message(t_id,p_id,message,send_time,send_reci)
-            VALUE (#{teacher.id},#{parents.phone},#{message},#{send_reci},#{send_time})
+            VALUE (#{teacher.id},#{parents.phone},#{message},#{send_time},#{send_reci})
     </insert>
 </mapper>
