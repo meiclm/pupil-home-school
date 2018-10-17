@@ -9,14 +9,15 @@
                 性别：<span v-text="myTeacher.sex==1?'男':'女'"></span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 工号：{{myTeacher.id}}<br><br>
-                职位：<span v-if="myTeacher.admin==1">有职位</span>
+                职位：<span v-text="myTeacher.position">有职位</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                教学科目：<span>{{myTeacher.teaching}}</span>
+                教学科目：<span>{{myTeacher.course.cName}}</span>
               </div>
               <div slot="bottom" class="demo-split-pane">
-                邮箱：{{myTeacher.email}}
+                <Icon type="ios-paper-plane" />邮箱：{{myTeacher.email}}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                微信：{{myTeacher.wechat}}
+                <Icon type="ios-chatbubbles" />微信：{{myTeacher.wechat}}<br>
+                <Icon type="ios-call" />电话：{{myTeacher.telephone}}
               </div>
             </Split>
           </div>
@@ -40,7 +41,22 @@
     export default {
       data(){
         return{
-          myTeacher:{},
+          myTeacher:{
+            id: '',
+            name: '',
+            password: '',
+            email: '',
+            wechat: '',
+            telephone: '',
+            position: '',
+            sex: '',
+            birthday: '',
+            admin: '',
+            course: {
+              cId: '',
+              cName: ''
+            }
+          },
           split2: 0.5
         }
       },
@@ -54,7 +70,6 @@
               }
             }).then(function (response) {
             that.myTeacher = response.data;
-            console.log(that.myTeacher);
           }).catch(function (error) {
             console.log(error)
           })

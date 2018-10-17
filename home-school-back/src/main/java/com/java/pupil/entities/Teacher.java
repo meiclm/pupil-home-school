@@ -11,7 +11,7 @@ public class Teacher {
     private String sex;
     private String birthday;
     private Integer admin;
-    private Integer teaching;
+    private Course course;
 
     public String getId() {
         return id;
@@ -93,12 +93,11 @@ public class Teacher {
         this.admin = admin;
     }
 
-    public Integer getTeaching() {
-        return teaching;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setTeaching(Integer teaching) {
-        this.teaching = teaching;
+    public void setCourse(Course course) {
+        this.course = course;
     }
-
 }

@@ -1,9 +1,11 @@
 <template>
   <div>
-    <Row>
-      <Col span="3">col-12</Col>
-      <Col span="3">col-12</Col>
-    </Row>
+    <Collapse v-model="value1">
+      <Panel name="1">
+        {{classList.classNo}}
+        <p slot="content"></p>
+      </Panel>
+    </Collapse>
   </div>
 </template>
 
@@ -14,7 +16,8 @@
     export default {
         data(){
           return{
-            classList:[]
+            classList:[],
+            msg:'',
           }
         },
       methods:{
@@ -25,8 +28,13 @@
                 'Content-Type': 'application/x-www-form-urlencoded'
               }
             }).then(function (response) {
-              console.log("该老师教的所有班级，该老师管理的班级"+response);
-              that.classList=response.data;
+              console.log("该老师教的所有班级，该老师管理的班级"+response.data);
+              if (response.data==null){
+                that.msg="您没有教学的班级！"
+              } else {
+                that.classList=response.data;
+              }
+
             })
           }
       },
