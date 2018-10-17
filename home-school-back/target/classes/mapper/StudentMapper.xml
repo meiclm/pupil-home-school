@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.pupil.mapper.StudentMapper">
+
+    <resultMap type="com.java.pupil.entities.Student" id="studentResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="birthday" column="birthday"/>
+        <result property="address" column="address"/>
+        <result property="phone" column="parent"/>
+    </resultMap>
+    <select id="findStudentById" parameterType="String" resultMap="studentResult">
+        select * from t_student WHERE id=#{id};
+    </select>
+    <select id="findByParentPhone" parameterType="String" resultMap="studentResult">
+        SELECT * from t_student WHERE parent=#{phone}
+    </select>
+
+    <select id="findByClass" parameterType="String" resultMap="studentResult">
+        SELECT * FROM t_student
+        WHERE
+        <if test='classNum !=null'>
+            id like "%"#{classNum}"%"
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.pupil.mapper.GradeClassMapper">
+    <resultMap type="com.java.pupil.entities.Teacher" id="teacherResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="position" column="position"/>
+        <result property="telephone" column="telephone"/>
+        <result property="wechat" column="wechat"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="admin" column="admin"/>
+        <result property="teaching" column="teaching"/>
+    </resultMap>
+
+    <resultMap id="gradeClassResult" type="com.java.pupil.entities.GradeClass">
+        <id property="classNo" column="class_no"/>
+        <result property="count" column="count"/>
+        <result property="describe" column="describe"/>
+        <association property="teacher" resultMap="teacherResult"/>
+    </resultMap>
+<!--找一年级的班级  1=> 一年级-->
+    <select id="findGradeClassByDescribe" parameterType="Integer" resultMap="gradeClassResult">
+        select * from t_class t1,t_teacher t2 WHERE t1.describe=#{describe} and t2.id=t1.teacher
+    </select>
+    <select id="findAllGradeByterm" parameterType="java.lang.String" resultType="com.java.pupil.entities.GradeReport">
+        select
+        t_grade.grade_id,t_student.id ,t_student.`name` as stuname,t_course.`name` as coursename,t_grade.grade
+        from t_grade,t_course,t_student
+        where t_grade.s_no=t_student.id and t_grade.c_no=t_course.id and term=#{term}
+    </select>
+</mapper>

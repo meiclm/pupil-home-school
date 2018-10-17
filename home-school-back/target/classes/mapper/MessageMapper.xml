@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.pupil.mapper.MessageMapper">
+
+    <resultMap type="com.java.pupil.entities.Teacher" id="teacherResult">
+        <id property="id" column="tId"/>
+        <result property="name" column="tName"/>
+        <result property="password" column="tPassword"/>
+        <result property="email" column="tEmail"/>
+        <result property="position" column="position"/>
+        <result property="telephone" column="telephone"/>
+        <result property="wechat" column="tWechat"/>
+        <result property="sex" column="tSex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="admin" column="admin"/>
+    </resultMap>
+
+    <resultMap type="com.java.pupil.entities.Parents" id="parentsResult">
+        <id property="phone" column="phone"/>
+        <result column="password" property="ppassword"/>
+        <result property="name" column="pname"/>
+        <result property="describe" column="describe"/>
+        <result property="job" column="job"/>
+        <result property="wechat" column="pwechat"/>
+        <result property="email" column="pemail"/>
+    </resultMap>
+
+    <resultMap type="com.java.pupil.entities.Message" id="messageResult">
+        <id property="mId" column="id"/>
+        <result property="message" column="message"/>
+        <result property="send_time" column="send_time"/>
+        <result property="send_reci" column="send_reci"/>
+        <association property="teacher" resultMap="teacherResult"/>
+        <association property="parents" resultMap="parentsResult"/>
+    </resultMap>
+
+    <select id="getAllMessage" resultMap="messageResult" parameterType="String">
+        select t1.id,message,send_time,send_reci,phone,t2.name pname,t2.password ppassword,t2.describe,job,t2.wechat pwechat
+        ,t2.email pemail,t3.id tId,t3.name tName,t3.email tEmail,telephone,t3.wechat tWechat,t3.sex tSex,position
+        FROM message t1,t_parent t2,t_teacher t3
+        WHERE t1.t_id=t3.id and t2.phone=t1.p_id and t1.send_reci='2'
+    </select>
+    <insert id="addMessage" parameterType="com.java.pupil.entities.Message">
+        INSERT into message(t_id,p_id,message,send_time,send_reci)
+            VALUE (#{teacher.id},#{parents.phone},#{message},#{send_reci},#{send_time})
+    </insert>
+</mapper>
