@@ -1,0 +1,6 @@
+{
+  "globalDependencies": {
+    "axios": "registry:dt/axios#0.9.1+20161016142654",
+    "vue-resource": "registry:dt/vue-resource#0.9.3+20160803221903"
+  }
+}

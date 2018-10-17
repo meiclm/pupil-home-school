@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.pupil.mapper.MessageMapper">
+
+    <resultMap type="com.java.pupil.entities.Teacher" id="teacherResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="position" column="position"/>
+        <result property="telephone" column="telephone"/>
+        <result property="wechat" column="wechat"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="admin" column="admin"/>
+        <result property="teaching" column="teaching"/>
+    </resultMap>
+
+    <resultMap type="com.java.pupil.entities.Parents" id="parentsResult">
+        <id property="phone" column="phone"/>
+        <result column="password" property="password"/>
+        <result property="name" column="name"/>
+        <result property="describe" column="describe"/>
+        <result property="job" column="job"/>
+        <result property="wechat" column="wechat"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <resultMap type="com.java.pupil.entities.Message" id="messageResult">
+        <id property="id" column="id"/>
+        <result property="message" column="message"/>
+        <result property="send_time" column="send_time"/>
+        <association property="teacher" resultMap="teacherResult"/>
+        <association property="parents" resultMap="parentsResult"/>
+    </resultMap>
+
+    <select id="getAllMessage" resultMap="messageResult" parameterType="String">
+        select t_id,p_id,send_time,message,send_reci
+        FROM message
+    </select>
+    <insert id="addMessage" parameterType="com.java.pupil.entities.Message">
+        INSERT into message(t_id,p_id,message,send_time,send_reci)
+                VALUE (#{teacher.id},#{parents.phone},#{message},#{send_reci})
+    </insert>
+</mapper>

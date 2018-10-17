@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.pupil.mapper.CourseGradeMapper">
+    <resultMap id="gradeResult" type="com.java.pupil.entities.CourseGrade">
+        <result property="c_no" column="c_no"/>
+        <result property="s_no" column="s_no"/>
+        <result property="name" column="name"/>
+        <result property="grade" column="grade"/>
+        <result property="term" column="term"/>
+    </resultMap>
+
+    <select id="findByTerm" resultMap="gradeResult">
+        SELECT * from view_grade WHERE s_no=#{s_no} AND term=#{term}
+    </select>
+    <select id="findAllTerm" resultMap="gradeResult" parameterType="String">
+        select * from view_grade WHERE s_no=#{s_no}
+    </select>
+    <!--不及格成绩-->
+    <select id="findLowGrade" resultMap="gradeResult" parameterType="String">
+        SELECT * from view_grade WHERE grade &lt;=60 AND s_no=#{s_no} AND term=#{term}
+    </select>
+    <select id="findAllLowGrade" resultMap="gradeResult" parameterType="String">
+        SELECT * from view_grade WHERE grade &lt;=60 AND s_no=#{s_no}
+    </select>
+</mapper>

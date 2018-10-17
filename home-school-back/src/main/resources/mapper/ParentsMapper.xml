@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.pupil.mapper.ParentsMapper">
+    <resultMap type="com.java.pupil.entities.Parents" id="parentsResult">
+        <id property="phone" column="phone"/>
+        <result column="password" property="password"/>
+        <result property="name" column="name"/>
+        <result property="describe" column="describe"/>
+        <result property="job" column="job"/>
+        <result property="wechat" column="wechat"/>
+        <result property="email" column="email"/>
+    </resultMap>
+    <resultMap id="studentParent" type="com.java.pupil.entities.StudentParent">
+        <id property="id" column="id"/>
+        <result column="stuname" property="stuname"/>
+        <result column="birthday" property="birthday"/>
+        <result column="phone" property="phone"/>
+        <result column="parname" property="parname"/>
+        <result column="job" property="job"/>
+    </resultMap>
+    <select id="findByPhone" parameterType="String" resultMap="parentsResult">
+        SELECT * from t_parent where phone=#{username}
+    </select>
+    <select id="findByOpenId" parameterType="java.lang.String" resultMap="studentParent">
+        SELECT t_student.id,t_student.`name` as stuname,t_student.birthday,t_parent.phone,t_parent.`name` as parname,t_parent.job from t_student
+        INNER JOIN t_parent on t_student.parent=t_parent.phone
+        where t_parent.openId=#{openId}
+    </select>
+    <update id="updateParent" parameterType="com.java.pupil.entities.Parents">
+        UPDATE t_parents SET password=#{password},name=#{name},email=#{email}, wechat=#{wechat},
+            describe=#{describe},job=#{job}
+        WHERE phone=#{phone}
+    </update>
+    <insert id="insertParent" parameterType="com.java.pupil.entities.Parents">
+        INSERT INTO t_parents(phone,password,name,wechat) VALUES
+            (#{phone}, #{password}, #{name}, #{wechat})
+    </insert>
+</mapper>
