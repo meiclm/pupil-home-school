@@ -66,6 +66,7 @@ public class ParentsController {
         }
         return null;
     }
+//    学生与父母关联
     @GetMapping("/parent/students")
     public List<StudentParent> findByOpenId(@RequestParam("open_id") String open_id){
        List<StudentParent> list = parentsMapper.findByOpenId(open_id);
@@ -75,6 +76,13 @@ public class ParentsController {
        else{
            return null;
        }
+    }
+
+//    查询父母信息openID
+    @GetMapping("/parent")
+    public  Parents  findParentsByOpenId(@RequestParam("open_id") String open_id){
+       Parents parents = parentsMapper.findParentsByOpenId(open_id);
+       return parents;
     }
 //    写留言给班主任
 //    看期末评语

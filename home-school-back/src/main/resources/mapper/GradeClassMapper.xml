@@ -27,4 +27,10 @@
     <select id="findGradeClassByDescribe" parameterType="Integer" resultMap="gradeClassResult">
         select * from t_class t1,t_teacher t2 WHERE t1.describe=#{describe} and t2.id=t1.teacher
     </select>
+    <select id="findAllGradeByterm" parameterType="java.lang.String" resultType="com.java.pupil.entities.GradeReport">
+        select
+        t_grade.grade_id,t_student.id ,t_student.`name` as stuname,t_course.`name` as coursename,t_grade.grade
+        from t_grade,t_course,t_student
+        where t_grade.s_no=t_student.id and t_grade.c_no=t_course.id and term=#{term}
+    </select>
 </mapper>

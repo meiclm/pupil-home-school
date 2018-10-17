@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/home_school?characterEncoding=utf8&useSSL=true
     username: root
-    password: 123456
+    password: 43797189
 
 mybatis:
   type-aliases-package: tk.mybatis.springboot.model

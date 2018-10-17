@@ -27,7 +27,10 @@
     <select id="findByOpenId" parameterType="java.lang.String" resultMap="studentParent">
         SELECT t_student.id,t_student.`name` as stuname,t_student.birthday,t_parent.phone,t_parent.`name` as parname,t_parent.job from t_student
         INNER JOIN t_parent on t_student.parent=t_parent.phone
-        where t_parent.openId=#{openId}
+        where t_parent.openID=#{openId}
+    </select>
+    <select id="findParentsByOpenId" parameterType="java.lang.String" resultMap="parentsResult" >
+        select * from t_parent where openID=#{openId}
     </select>
     <update id="updateParent" parameterType="com.java.pupil.entities.Parents">
         UPDATE t_parents SET password=#{password},name=#{name},email=#{email}, wechat=#{wechat},

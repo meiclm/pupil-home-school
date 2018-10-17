@@ -11,4 +11,5 @@ public interface ParentsMapper {
     public List<StudentParent> findByOpenId(String opoenId);
     public void updateParent(Parents parents);
     public void insertParent(Parents parents);
+    public Parents findParentsByOpenId(String openId);
 }
