@@ -1,3 +1,4 @@
+
 package com.java.pupil.entities;
 
 public class Message {

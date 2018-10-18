@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.pupil.mapper.TeacherMapper">
+    <resultMap id="courseResult" type="com.java.pupil.entities.Course">
+        <id property="cId" column="cId"/>
+        <result property="cName" column="cName"/>
+    </resultMap>
+
+    <resultMap type="com.java.pupil.entities.Teacher" id="teacherResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="position" column="position"/>
+        <result property="telephone" column="telephone"/>
+        <result property="wechat" column="wechat"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+        <result property="admin" column="admin"/>
+        <association property="course" resultMap="courseResult"/>
+    </resultMap>
+
+    <select id="findById" resultMap="teacherResult" parameterType="String">
+        select t1.id,t1.name,password,email,wechat,admin,telephone,position,sex,birthday,t2.id cId,t2.name cName
+        from t_teacher t1,t_course t2 where t1.id=#{id} and t1.teaching=t2.id
+    </select>
+    <insert id="insertTeacher" parameterType="com.java.pupil.entities.Teacher">
+        insert into t_teacher (id, name, password, email, position, telephone, wechat, sex, birthday,admin,teaching)
+        values
+            (#{id}, #{name}, #{password}, #{email}, #{position}, #{telephone}, #{wechat}, #{sex},#{birthday},
+             #{admin},#{teaching})
+    </insert>
+    <update id="updateTeacher" parameterType="com.java.pupil.entities.Teacher">
+        UPDATE t_teacher SET name=#{name},password=#{password},email=#{email},position=#{position},
+            telephone=#{telephone},sex=#{sex},birthday=#{birthday},admin=#{admin},teaching=#{teaching},
+            wechat=#{wechat}
+        WHERE id=#{id}
+    </update>
+</mapper>

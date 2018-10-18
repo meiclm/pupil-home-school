@@ -24,5 +24,10 @@ public class StudentController {
         List<CourseGrade> gradeList=courseGradeMapper.findAllTerm(s_no);
         return gradeList;
     }
+//    查找这个班级下的所有学生
+    @GetMapping("/class/students")
+    public List<Student> find(@RequestParam("c_id")String classNum){
+        return studentMapper.findByClass(classNum);
+    }
 }
 

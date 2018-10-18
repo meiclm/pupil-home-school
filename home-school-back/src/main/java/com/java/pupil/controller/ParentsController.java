@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.GroupSequence;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -96,7 +98,7 @@ public class ParentsController {
     }
 //    父母回复教师留言
     @PostMapping("/parent/message-send")
-    public String MessageToTeacher(@RequestParam String t_id,@RequestParam String message,@RequestParam String p_id){
+    public Integer MessageToTeacher(@RequestParam String t_id,@RequestParam String message,@RequestParam String p_id){
         String send_reci = "2";
         Message messageToTeacher = new Message();
         Teacher teacher = new Teacher();
@@ -107,7 +109,10 @@ public class ParentsController {
         messageToTeacher.setMessage(message);
         messageToTeacher.setTeacher(teacher);
         messageToTeacher.setParents(parents);
-        messageMapper.addMessage(messageToTeacher);
-        return null;
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        messageToTeacher.setSend_time(df.format(new Date()));
+        int result = messageMapper.addMessageToTeacher(messageToTeacher);
+        System.out.println(result);
+        return result;
     }
 }

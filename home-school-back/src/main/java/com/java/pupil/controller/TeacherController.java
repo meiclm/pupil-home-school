@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -80,9 +81,6 @@ public class TeacherController {
         PageInfo<Student> page = new PageInfo<>(studentList);
         return page;
     }
-//    更新一门成绩
-
-//    插入一门成绩
 
 //    查留言区
     @GetMapping("/message")
@@ -91,8 +89,20 @@ public class TeacherController {
     }
 //    回复留言
     @PostMapping("/message/send")
-    public int send(Message message){
-        messageMapper.addMessage(message);
+    public int send(String t_id,String phone,String message){
+        Message m=new Message();
+        Teacher t=new Teacher();
+        Parents p=new Parents();
+        t.setId(t_id);
+        m.setTeacher(t);
+        p.setPhone(phone);
+        m.setParents(p);
+        m.setMessage(message);
+        m.setSend_reci(1);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        m.setSend_time(df.format(new Date()));
+        System.out.println("更新的留言信息："+m);
+        messageMapper.addMessage(m);
         return 1;
     }
 //    教师查询学期成绩单
@@ -119,6 +129,7 @@ public class TeacherController {
     @GetMapping("/teacher/allgrade")
     public Map<String,Map<String,String>>  getGrade(@RequestParam("term") String term){
         List<GradeReport> list = gradeClassMapper.findAllGradeByterm(term);
+
         Map<String,Map<String,String>> grade_list = new HashMap<>();
         int size = list.size();
         Set<String> id_set = new TreeSet<>();

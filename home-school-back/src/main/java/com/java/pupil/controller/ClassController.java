@@ -15,8 +15,8 @@ public class ClassController {
     private GradeClassMapper gradeClassMapper;
 
 //    查老师教的管理的班级
-//    @GetMapping("/teaching/class")
-//    public List<GradeClass> findAllClass(@RequestParam("t_id") String t_id){
-//        return gradeClassMapper.findAllClass(t_id);
-//    }
+    @GetMapping("/teaching/class")
+    public List<GradeClass> findAllClass(@RequestParam("t_id") String t_id){
+        return gradeClassMapper.findAllClassByTeacher(t_id);
+    }
 }

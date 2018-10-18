@@ -9,6 +9,8 @@ import java.util.List;
 public interface GradeClassMapper {
 //    通过三年级/六年级这样查一个年级的班级 如：1=>一年级
     public List<GradeClass> findGradeClassByDescribe(Integer describe);
+
     public List<GradeReport> findAllGradeByterm(String term);
+    public List<GradeClass> findAllClassByTeacher(String t_id);
 
 }

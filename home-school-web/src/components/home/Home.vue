@@ -11,6 +11,8 @@
         name: "Home",
       components:{
         "app-header":Header
+      },
+      created(){
       }
     }
 </script>

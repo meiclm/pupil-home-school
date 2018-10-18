@@ -39,28 +39,19 @@ public class UsersController {
         return -1;
     }
 
-//    家长注册验证
-    public int signUp(Parents parents){
-        List<Student> studentList=studentMapper.findByParentPhone(parents.getPhone());
-        if (studentList.size()<=0){
-            return -1;
-        }else {
-            parentsMapper.insertParent(parents);
-            return 1;
-        }
-    }
 //    老师注册,老师的id（工号）由管理员写入数据库
-    @GetMapping("/teacher/sign-in")
+    @GetMapping("/teacher/sign-up")
     public int signUp(String username,String password,String phone){
         Teacher newTeacher=teacherMapper.findById(username);
         if (newTeacher!=null){
+            System.out.println("该老师已经存在！");
+            return -1;
+        }else {
             newTeacher.setPassword(password);
             newTeacher.setTelephone(phone);
             teacherMapper.updateTeacher(newTeacher);
             return 1;
-        }else {
-            System.out.println("没有查到该老师工号！");
-            return -1;
+
         }
     }
 }

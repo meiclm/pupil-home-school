@@ -20,7 +20,7 @@
         </MenuItem>
         <MenuItem name="4">
           <Icon type="logo-tux" />
-          <span @click="studentId('15084201')">全部学生</span>
+          <span @click="">学生成绩管理</span>
         </MenuItem>
       </MenuGroup>
     </Menu>
