@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2018-10-16 09:41:08
+Date: 2018-10-17 19:25:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -94,7 +94,7 @@ CREATE TABLE `t_grade` (
   KEY `c_no_idx` (`c_no`),
   CONSTRAINT `c_no` FOREIGN KEY (`c_no`) REFERENCES `t_course` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `s_no` FOREIGN KEY (`s_no`) REFERENCES `t_student` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_grade
@@ -108,6 +108,18 @@ INSERT INTO `t_grade` VALUES ('6', '15084101', '3', '16-17-01', '100');
 INSERT INTO `t_grade` VALUES ('7', '15084201', '1', '16-17-02', '90');
 INSERT INTO `t_grade` VALUES ('8', '15084201', '2', '16-17-02', '66');
 INSERT INTO `t_grade` VALUES ('9', '15084201', '3', '16-17-02', '100');
+INSERT INTO `t_grade` VALUES ('10', '15084235', '1', '16-17-01', '90');
+INSERT INTO `t_grade` VALUES ('11', '15084235', '2', '16-17-01', '100');
+INSERT INTO `t_grade` VALUES ('12', '15084235', '3', '16-17-01', '90');
+INSERT INTO `t_grade` VALUES ('13', '15084235', '1', '16-17-02', '90');
+INSERT INTO `t_grade` VALUES ('14', '15084235', '2', '16-17-02', '90');
+INSERT INTO `t_grade` VALUES ('15', '15084235', '3', '16-17-02', '80');
+INSERT INTO `t_grade` VALUES ('16', '15084232', '1', '16-17-01', '80');
+INSERT INTO `t_grade` VALUES ('17', '15084232', '2', '16-17-01', '80');
+INSERT INTO `t_grade` VALUES ('18', '15084232', '3', '16-17-01', '90');
+INSERT INTO `t_grade` VALUES ('19', '15084232', '1', '16-17-02', '99');
+INSERT INTO `t_grade` VALUES ('20', '15084232', '2', '16-17-02', '90');
+INSERT INTO `t_grade` VALUES ('21', '15084232', '3', '16-17-02', '100');
 
 -- ----------------------------
 -- Table structure for t_parent
@@ -184,7 +196,6 @@ INSERT INTO `t_teacher` VALUES ('1998090102', '123456', '赵琦', '普通老师'
 INSERT INTO `t_teacher` VALUES ('1998090103', '123456', '谭诗雨', '校长', '15925207632', '1150573527@qq.com', 'tsy11223456', '0', '1968-10-15', '10', '1');
 INSERT INTO `t_teacher` VALUES ('1998090104', '123456', '李丹妮', '教务处主任', '18334729708', '1565893158@qq.com', 'wxid_nraasje1tksh22', '0', '1968-10-15', '9', '1');
 INSERT INTO `t_teacher` VALUES ('1999090101', '123456', '翟思源', '副校长', '13834648200', '921358361@qq.com', 'zsy921358361', '1', '1968-03-02', '3', '1');
-INSERT INTO `t_teacher` VALUES ('1999090102', '123456', '孙琦', '普通老师', '13834648200', '1904705132@qq.com', 'e868142', '1', '1978-10-02', '4', '0');
 
 -- ----------------------------
 -- View structure for view_grade

@@ -1,19 +1,19 @@
 package com.java.pupil.entities;
 
 public class Message {
-    private Integer id;
+    private Integer mId;
     private Teacher teacher;
     private Parents parents;
     private String message;
     private String send_time;
     private Integer send_reci;
 
-    public Integer getId() {
-        return id;
+    public Integer getmId() {
+        return mId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setmId(Integer mId) {
+        this.mId = mId;
     }
 
     public Teacher getTeacher() {
@@ -57,4 +57,6 @@ public class Message {
     public void setSend_reci(Integer send_reci) {
         this.send_reci = send_reci;
     }
+
+
 }

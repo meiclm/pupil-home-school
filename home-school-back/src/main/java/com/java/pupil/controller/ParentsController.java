@@ -2,11 +2,9 @@ package com.java.pupil.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.java.pupil.entities.CourseGrade;
-import com.java.pupil.entities.Parents;
-import com.java.pupil.entities.Student;
-import com.java.pupil.entities.StudentParent;
+import com.java.pupil.entities.*;
 import com.java.pupil.mapper.CourseGradeMapper;
+import com.java.pupil.mapper.MessageMapper;
 import com.java.pupil.mapper.ParentsMapper;
 import com.java.pupil.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.GroupSequence;
 import java.util.List;
 
 @RestController
@@ -25,6 +24,8 @@ public class ParentsController {
     private StudentMapper studentMapper;
     @Autowired
     private CourseGradeMapper courseGradeMapper;
+    @Autowired
+    private MessageMapper messageMapper;
 
 //    查询学生该学期成绩1
    @GetMapping("/student/term")
@@ -86,4 +87,27 @@ public class ParentsController {
     }
 //    写留言给班主任
 //    看期末评语
+//    查询教师给父母的留言
+    @GetMapping("/parent/message")
+    public List<Message> findMessageToParent(@RequestParam("p_id") String p_id){
+       List<Message> list = messageMapper.findMesageToParent(p_id);
+       System.out.println(list);
+       return  list;
+    }
+//    父母回复教师留言
+    @PostMapping("/parent/message-send")
+    public String MessageToTeacher(@RequestParam String t_id,@RequestParam String message,@RequestParam String p_id){
+        String send_reci = "2";
+        Message messageToTeacher = new Message();
+        Teacher teacher = new Teacher();
+        Parents parents = new Parents();
+        teacher.setId(t_id);
+        parents.setPhone(p_id);
+        messageToTeacher.setSend_reci(2);
+        messageToTeacher.setMessage(message);
+        messageToTeacher.setTeacher(teacher);
+        messageToTeacher.setParents(parents);
+        messageMapper.addMessage(messageToTeacher);
+        return null;
+    }
 }

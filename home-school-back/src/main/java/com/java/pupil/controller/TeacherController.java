@@ -119,7 +119,6 @@ public class TeacherController {
     @GetMapping("/teacher/allgrade")
     public Map<String,Map<String,String>>  getGrade(@RequestParam("term") String term){
         List<GradeReport> list = gradeClassMapper.findAllGradeByterm(term);
-
         Map<String,Map<String,String>> grade_list = new HashMap<>();
         int size = list.size();
         Set<String> id_set = new TreeSet<>();
@@ -135,8 +134,6 @@ public class TeacherController {
                 }
             }
             grade_list.put(s_no,grade_map);
-
-
         }
 //        System.out.println(grade_list);
         return grade_list;
